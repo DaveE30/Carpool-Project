@@ -1,14 +1,44 @@
-<!-- create a template to display return of first-test.py -->
-<!-- Index template for Carpool Project --> 
+<!-- Welcome Page Template for Carpool Project -->
 <!DOCTYPE html>
 <html lang="en">    
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">        
-    <title>Carpool Project - Home</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Carpool Project - Welcome</title>
+    <link rel="stylesheet" href="/static/styles/styles.css">
+   <!-- <style>
+        body {
+            text-align: center; /* Center all text */
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #333; /* Dark text color */
+            margin: 0;
+            padding: 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3498db; /* Blue */
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+    </style> -->
 </head>
 <body>
-    <h1>{{ main }}</h1>
+    <h1>Welcome to the Fast and the Frugal!</h1>
+    <p>
+        <strong>
+            This app helps you share rides with others, save costs, and reduce your carbon footprint. 
+            Enter your car details, destination, and the number of riders to get started!
+        </strong>
+    </p>
+    <button onclick="window.location.href='/car'">Get Started</button>
 </body>
 </html>
