@@ -1,0 +1,83 @@
+/* styles.css */
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff; /* Light blue background */
+    color: #333; /* Dark text color for readability */
+    line-height: 1.6;
+}
+
+/* Header styling */
+h1 {
+    text-align: center;
+    color: #2c3e50; /* Dark blue */
+    margin-top: 20px;
+    font-size: 2.5em;
+}
+
+/* Paragraph styling */
+p {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 20px auto;
+    max-width: 600px;
+    color: #555; /* Medium gray */
+}
+
+/* Form styling */
+form {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for form */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Label styling */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #2c3e50; /* Dark blue */
+}
+
+/* Input fields styling */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Button styling */
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db; /* Blue */
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Add some spacing between elements */
+br {
+    margin-bottom: 10px;
+}
