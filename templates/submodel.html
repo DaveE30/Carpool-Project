@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Selection</title>
+    <link rel="stylesheet" href="/static/styles/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Select Your Car</h1>
+        <form method="GET" action="/destination">
+            <p>Selected Year: {{ selected_year }}</p>
+            <p>Selected Make: {{ selected_make }}</p>
+            <p>Selected Model: {{ selected_model }}</p>
+            
+            <label for="submodel">Submodel:</label>
+            <select id="submodel" name="submodel" >
+                <option value="">Select Submodel</option>
+                {% for submodel in submodels %}
+                    <option value="{{ submodel }}" {% if selected_submodel == submodel %}selected{% endif %}>{{ submodel }}</option>
+                {% endfor %}
+            </select>
+            <button id="back-button" type="button" onclick="window.history.back();">Back</button>
+            <button id="next-button" type="submit" >Next</button>
+        </form>
+    </div>  
+</body>
+</html>
