@@ -14,20 +14,20 @@ def get_car_years():
         response = requests.get(f"{CAR_API_URL}/years/v2", headers={ 'accept': 'text/plain', 'content-type': 'application/json' })
         response.raise_for_status()
         years_data = response.json()
-        print(years_data)
+        # print(years_data)
         return years_data
     except Exception as e:
         print(f"Error: {e}")
         return None
     
-def get_car_makes(year):
+def get_car_makes():
     try:
-        response = requests.get(f"{CAR_API_URL}/makes/v2/?year={year}", headers={ 'accept': 'text/plain', 'content-type': 'application/json' })
+        response = requests.get(f"{CAR_API_URL}/makes/v2/?", headers={ 'accept': 'text/plain', 'content-type': 'application/json' })
         response.raise_for_status()
         makes_data = response.json().get('data', {})
         # for each name in makes_data, store the name in a list
         makes_list = [make.get('name') for make in makes_data]
-        print(makes_list)
+        # print(makes_list)
         return makes_list
     except Exception as e:
         print(f"Error: {e}")
@@ -39,7 +39,7 @@ def get_car_models(year, make):
         response.raise_for_status()
         models_data = response.json().get('data', {})
         models_list = [model.get('name') for model in models_data]
-        print(models_list)
+        # print(models_list)
         return models_list
     except Exception as e:
         print(f"Error: {e}")
@@ -57,8 +57,19 @@ def get_car_submodels(year, make, model):
         print(f"Error: {e}")
         return None
 
-if __name__ == "__main__":
-    years = get_car_years()
-    makes = get_car_makes(2020)
-    models = get_car_models(2020, "Toyota")
-    submodels = get_car_submodels(2020, "Toyota", "Camry")
+def get_car_details(year, make, model, submodel):
+    try:
+        response = requests.get(f"{CAR_API_URL}/mileages/v2/?year={year}&make={make}&model={model}&submodel={submodel}", headers={ 'accept': 'text/plain', 'content-type': 'application/json' })
+        response.raise_for_status()
+        details_data = response.json().get('data', {})
+        print(details_data)
+        return details_data
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+    # years = get_car_years()
+    # makes = get_car_makes(2020)
+    # models = get_car_models(2020, "Toyota")
+    # submodels = get_car_submodels(2020, "Toyota", "Camry")
+# get_car_details(2020, "Toyota", "Camry", "LE")
