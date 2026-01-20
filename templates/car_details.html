@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <link rel="stylesheet" href="/static/styles/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Car Details</h1>
+        
+        <div class="car-info">
+            {% if details %}
+                {% set keys_to_display = ['year', 'make', 'model', 'submodel', 'fuel_tank_capacity', 'combined_mpg', 'epa_city_mpg', 'epa_highway_mpg', 'range_city', 'range_highway'] %}
+                
+                {% for key in keys_to_display %}
+                    {% if key in details %}
+                        <p><strong>{{ key | title }}:</strong> {{ details[key] }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>No details available for this car.</p>
+            {% endif %}
+        </div>
+
+        <button id="back-button" type="button" onclick="window.history.back();">Back</button>
+        <button id="next-button" type="button" onclick="window.location.href='/destination'">Next</button>
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from main import main
-from car_api import get_car_years, get_car_makes, get_car_models, get_car_submodels
+from car_api import get_car_years, get_car_makes, get_car_models, get_car_submodels, get_car_details
 
 app = Flask(__name__)
 
@@ -34,6 +34,15 @@ def car_submodel_choice():
     submodels_list = get_car_submodels(year_chosen, make_chosen, model_chosen)
     print(submodels_list)
     return render_template('submodel.html', submodels=submodels_list, selected_year=year_chosen, selected_make=make_chosen, selected_model=model_chosen, selected_submodel=submodel_chosen)
+
+@app.route('/car-details', methods=['GET'])
+def car_details():
+    year_chosen = request.args.get('year')
+    make_chosen = request.args.get('make')
+    model_chosen = request.args.get('model')
+    submodel_chosen = request.args.get('submodel')
+    details = get_car_details(year_chosen, make_chosen, model_chosen, submodel_chosen)
+    return render_template('car_details.html', details=details, year=year_chosen, make=make_chosen, model=model_chosen, submodel=submodel_chosen)
 
 if __name__ == '__main__':
     app.run(debug=True)
