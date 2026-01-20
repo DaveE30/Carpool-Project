@@ -9,11 +9,16 @@
 <body>
     <div class="container">
         <h1>Select Your Car</h1>
-        <form method="GET" action="/destination">
+        <form method="GET" action="/car-details">
             <p>Selected Year: {{ selected_year }}</p>
             <p>Selected Make: {{ selected_make }}</p>
             <p>Selected Model: {{ selected_model }}</p>
-            
+
+            <!-- Hidden fields to pass data forward -->
+            <input type="hidden" name="year" value="{{ selected_year }}">
+            <input type="hidden" name="make" value="{{ selected_make }}">
+            <input type="hidden" name="model" value="{{ selected_model }}">
+
             <label for="submodel">Submodel:</label>
             <select id="submodel" name="submodel" >
                 <option value="">Select Submodel</option>

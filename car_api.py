@@ -62,7 +62,8 @@ def get_car_details(year, make, model, submodel):
         response = requests.get(f"{CAR_API_URL}/mileages/v2/?year={year}&make={make}&model={model}&submodel={submodel}", headers={ 'accept': 'text/plain', 'content-type': 'application/json' })
         response.raise_for_status()
         details_data = response.json().get('data', {})
-        print(details_data)
+        details_data = details_data[0] if details_data else {}
+        print("CAR DETAILS", details_data)
         return details_data
     except Exception as e:
         print(f"Error: {e}")
@@ -72,4 +73,4 @@ def get_car_details(year, make, model, submodel):
     # makes = get_car_makes(2020)
     # models = get_car_models(2020, "Toyota")
     # submodels = get_car_submodels(2020, "Toyota", "Camry")
-# get_car_details(2020, "Toyota", "Camry", "LE")
+get_car_details(2020, "Toyota", "Camry", "LE")
