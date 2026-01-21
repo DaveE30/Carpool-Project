@@ -38,15 +38,19 @@
         
         <form action="/passengers" method="POST">
             <label for="passengers" style="color: #667eea; font-weight: bold; font-size: 1.1em; display: block; margin-bottom: 10px;">🚗 Number of Passengers:</label>
-            <input 
-                type="number" 
+            <select 
                 id="passengers" 
                 name="passengers" 
-                min="1" 
-                max="6" 
-                required 
-                placeholder="Enter number of passengers (1-6)"
+                required
             >
+                <!-- <option value="">Select number of passengers</option> -->
+                <option value="1">1 </option>
+                <option value="2">2 </option>
+                <option value="3">3 </option>
+                <option value="4">4 </option>
+                <option value="5">5 </option>
+                <option value="6">6 </option>
+            </select>
             
             <button type="submit">✨ Continue ✨</button>
         </form>
