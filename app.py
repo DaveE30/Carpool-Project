@@ -44,5 +44,9 @@ def car_details():
     details = get_car_details(year_chosen, make_chosen, model_chosen, submodel_chosen)
     return render_template('car_details.html', details=details, year=year_chosen, make=make_chosen, model=model_chosen, submodel=submodel_chosen)
 
+@app.route('/trip-input', methods=['GET'])
+def trip_input():
+    return render_template('trip_input.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
