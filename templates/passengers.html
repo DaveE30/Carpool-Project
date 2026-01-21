@@ -1,0 +1,34 @@
+<!-- create a html page and ask user to select number of passenger and set passenger limit to 6 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Select Number of Passengers</title>
+    <link rel="stylesheet" href="/static/styles/styles.css">
+</head>
+<body>
+    <h1>How Many Passengers will be traveling?</h1>
+    <p>
+        <strong>
+            Select the number of passengers for your carpool (Maximum 6 passengers).
+        </strong>
+    </p>
+    
+    <form action="/passengers" method="POST">
+        <label for="passengers">Number of Passengers:</label>
+        <input 
+            type="number" 
+            id="passengers" 
+            name="passengers" 
+            min="1" 
+            max="6" 
+            required 
+            placeholder="Enter number of passengers (1-6)"
+        >
+        
+        <button type="submit">Continue</button>
+    </form>
+</body>
+</html>
