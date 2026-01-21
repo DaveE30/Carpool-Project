@@ -16,7 +16,7 @@
                 
                 {% for key in keys_to_display %}
                     {% if key in details %}
-                        <p><strong>{{ key | title }}:</strong> {{ details[key] }}</p>
+                        <p><strong>{{ key | replace('_', ' ') | title }}:</strong> {{ details[key] }}</p>
                     {% endif %}
                 {% endfor %}
             {% else %}
