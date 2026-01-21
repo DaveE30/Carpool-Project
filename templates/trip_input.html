@@ -92,34 +92,6 @@
     .panel-title { font-size: 28px; font-weight: 700; color: #2d3748; margin-bottom: 8px; }
     .panel-desc { color: #718096; font-size: 16px; }
 
-    .alert {
-      padding: 16px 20px;
-      border-radius: 12px;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      animation: shake 0.5s;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-10px); }
-      75% { transform: translateX(10px); }
-    }
-
-    .alert.error {
-      background: #fff5f5;
-      border: 2px solid #fc8181;
-      color: #c53030;
-    }
-
-    .alert.success {
-      background: #f0fff4;
-      border: 2px solid #68d391;
-      color: #2f855a;
-    }
-
     .form-grid { display: flex; flex-direction: column; gap: 32px; }
 
     .field { display: flex; flex-direction: column; gap: 8px; }
@@ -128,9 +100,14 @@
       font-weight: 600;
       color: #2d3748;
       font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .control-row { display: flex; gap: 12px; align-items: center; }
+    .location-icon {
+      font-size: 18px;
+    }
 
     .control {
       padding: 14px 18px;
@@ -139,6 +116,8 @@
       font-size: 16px;
       transition: all 0.3s;
       font-family: inherit;
+      background: white;
+      width: 100%;
     }
 
     .control:focus {
@@ -147,29 +126,7 @@
       box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     }
 
-    input.control { flex: 1; }
-    select.control { min-width: 140px; cursor: pointer; }
-
-    .livepill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 20px;
-      color: white;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    .livepill-label { font-size: 13px; opacity: 0.9; }
-    .livepill-value { font-size: 18px; }
+    select.control { cursor: pointer; }
 
     .help {
       color: #a0aec0;
@@ -180,6 +137,45 @@
     .divider {
       height: 1px;
       background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+    }
+
+    .stops-section {
+      border: 2px dashed #e2e8f0;
+      border-radius: 12px;
+      padding: 24px;
+      background: #f7fafc;
+    }
+
+    .stops-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .stops-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #4a5568;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stop-field {
+      margin-bottom: 12px;
+    }
+
+    .stop-field:last-child {
+      margin-bottom: 0;
+    }
+
+    .add-stop-note {
+      font-size: 13px;
+      color: #718096;
+      font-style: italic;
+      text-align: center;
+      margin-top: 12px;
     }
 
     .actions-row { display: flex; gap: 16px; justify-content: flex-start; }
@@ -294,6 +290,7 @@
       .actions-row { flex-direction: column; }
       .btn { width: 100%; text-align: center; }
       .cards { grid-template-columns: 1fr; }
+      .stops-section { padding: 16px; }
     }
   </style>
 </head>
@@ -301,15 +298,12 @@
 <body>
   <header class="topbar">
     <div class="container topbar-row">
-      <a class="brandlink" href="/" aria-label="Go to Home">
+      <a class="brandlink" href="index.html" aria-label="Go to Home">
         <span class="brandmark" aria-hidden="true">🚗</span>
         <span class="brandtext">Fast & Frugal Carpool</span>
       </a>
 
       <nav class="topnav" aria-label="Primary navigation">
-        <a class="navlink" href="/">Home</a>
-        <a class="navlink" href="/about">About</a>
-        <a class="navlink" href="/support">Support</a>
       </nav>
     </div>
   </header>
@@ -317,9 +311,9 @@
   <main class="container app-main">
     <section class="pagehead">
       <div>
-        <h1 class="page-title">Trip input</h1>
+        <h1 class="page-title">Plan your trip</h1>
         <p class="page-subtitle">
-          Enter your trip distance and number of passengers to calculate fuel costs.
+          Enter your pickup location, destination, and any stops along the way.
         </p>
       </div>
     </section>
@@ -328,64 +322,116 @@
       <div class="panel-head">
         <h2 class="panel-title">Trip details</h2>
         <p class="panel-desc">
-          These values are used to estimate total fuel cost and cost per person.
+          Add your route information to calculate costs and coordinate with passengers.
         </p>
       </div>
 
-      <div class="alert error" hidden id="errorBox">
-        <strong>⚠️ Invalid input.</strong> Please enter a valid distance and passenger count.
-      </div>
-
-      <form class="form-grid" action="/calculate-trip" method="POST" novalidate>
+      <form class="form-grid" action="/calculate-trip" method="POST">
+        <!-- Pickup Address -->
         <div class="field">
-          <label for="distance">Distance</label>
-
-          <div class="control-row">
-            <input
-              class="control"
-              type="number"
-              id="distance"
-              name="distance"
-              min="1"
-              step="0.1"
-              placeholder="e.g., 120"
-              required
-            />
-
-            <select class="control" name="distance_unit" aria-label="Distance unit">
-              <option value="miles">Miles</option>
-              <option value="km">Kilometers</option>
-            </select>
-          </div>
-
+          <label for="pickup">
+            <span class="location-icon">📍</span>
+            Pickup address
+          </label>
+          <input
+            class="control"
+            type="text"
+            id="pickup"
+            name="pickup"
+            placeholder="Enter pickup location"
+            required
+          />
           <small class="help">
-            Total distance for the trip (one-way).
+            Starting point for your trip
           </small>
         </div>
 
         <div class="divider"></div>
 
-        <div class="field">
-          <label for="passengers">Number of passengers</label>
-
-          <div class="control-row">
-            <input
-              class="control"
-              type="number"
-              id="passengers"
-              name="passengers"
-              min="1"
-              max="6"
-              value="1"
-              required
-            />
-
-            <div class="livepill" aria-hidden="true">
-              <span class="livepill-label">People</span>
-              <span class="livepill-value" id="passengerPill">1</span>
-            </div>
+        <!-- Stops Section -->
+        <div class="stops-section">
+          <div class="stops-header">
+            <span class="stops-title">
+              <span>🛑</span>
+              Stops (optional)
+            </span>
           </div>
 
+          <div class="stop-field">
+            <input
+              class="control"
+              type="text"
+              id="stop1"
+              name="stop1"
+              placeholder="Stop 1 address"
+            />
+          </div>
+
+          <div class="stop-field">
+            <input
+              class="control"
+              type="text"
+              id="stop2"
+              name="stop2"
+              placeholder="Stop 2 address"
+            />
+          </div>
+
+          <div class="stop-field">
+            <input
+              class="control"
+              type="text"
+              id="stop3"
+              name="stop3"
+              placeholder="Stop 3 address"
+            />
+          </div>
+
+          <p class="add-stop-note">Add any stops between pickup and destination</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Destination Address -->
+        <div class="field">
+          <label for="destination">
+            <span class="location-icon">🎯</span>
+            Destination address
+          </label>
+          <input
+            class="control"
+            type="text"
+            id="destination"
+            name="destination"
+            placeholder="Enter destination"
+            required
+          />
+          <small class="help">
+            Final destination for your trip
+          </small>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Number of Passengers -->
+        <div class="field">
+          <label for="passengers">
+            <span class="location-icon">👥</span>
+            Number of passengers
+          </label>
+          <select
+            class="control"
+            id="passengers"
+            name="passengers"
+            required
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
           <small class="help">
             Includes the driver. Maximum of 6 people.
           </small>
@@ -397,7 +443,7 @@
           <button class="btn primary" type="submit">
             Calculate cost
           </button>
-          <a class="btn ghost" href="/" aria-label="Cancel and return home">
+          <a class="btn ghost" href="index.html" aria-label="Cancel and return home">
             Cancel
           </a>
         </div>
@@ -406,11 +452,11 @@
 
     <section class="cards">
       <article class="mini-card">
-        <div class="mini-icon">⛽</div>
+        <div class="mini-icon">🗺️</div>
         <div>
-          <h3 class="mini-title">Fuel cost</h3>
+          <h3 class="mini-title">Route planning</h3>
           <p class="mini-text">
-            Distance and efficiency determine total fuel usage.
+            Enter addresses to calculate the best route and total distance.
           </p>
         </div>
       </article>
@@ -443,34 +489,5 @@
       <p class="muted">CS 493 • Group Project</p>
     </div>
   </footer>
-
-  <script>
-    const passengerInput = document.getElementById("passengers");
-    const passengerPill = document.getElementById("passengerPill");
-    const form = document.querySelector("form");
-    const errorBox = document.getElementById("errorBox");
-
-    const syncPassengers = () => {
-      passengerPill.textContent = passengerInput.value || "—";
-    };
-
-    passengerInput.addEventListener("input", () => {
-      syncPassengers();
-      errorBox.hidden = true;
-    });
-
-    syncPassengers();
-
-    form.addEventListener("submit", (e) => {
-      const distance = Number(document.getElementById("distance").value);
-      const passengers = Number(passengerInput.value);
-
-      if (distance <= 0 || passengers < 1 || passengers > 6) {
-        e.preventDefault();
-        errorBox.hidden = false;
-        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
-  </script>
 </body>
 </html>
