@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About • Fast & Frugal Carpool</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #2d3748;
+      line-height: 1.6;
+    }
+
+    .topbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .topbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+    }
+
+    .brandlink {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #667eea;
+      font-weight: 700;
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .brandlink:hover {
+      transform: scale(1.05);
+    }
+
+    .brandmark {
+      font-size: 28px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .topnav {
+      display: flex;
+      gap: 24px;
+    }
+
+    .navlink {
+      text-decoration: none;
+      color: #4a5568;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .navlink:hover {
+      background: #f7fafc;
+      color: #667eea;
+    }
+
+    .navlink[aria-current="page"] {
+      color: #667eea;
+      background: #edf2f7;
+    }
+
+    .app-main {
+      padding: 60px 24px;
+    }
+
+    .about-hero {
+      text-align: center;
+      margin-bottom: 80px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .page-title {
+      font-size: 56px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 16px;
+      text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .page-subtitle {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 700px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+
+    .about-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 24px 32px;
+      border-radius: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .stat:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .stat:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .stat-number {
+      font-size: 36px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: fadeInUp 0.8s ease-out;
+      animation-fill-mode: both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .profile-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .profile-card:nth-child(1) { animation-delay: 0.1s; }
+    .profile-card:nth-child(2) { animation-delay: 0.2s; }
+    .profile-card:nth-child(3) { animation-delay: 0.3s; }
+    .profile-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .profile-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-card:hover .avatar {
+      transform: rotate(5deg) scale(1.1);
+    }
+
+    .profile-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 4px;
+    }
+
+    .profile-role {
+      font-size: 14px;
+      color: #718096;
+      font-weight: 500;
+    }
+
+    .profile-bio {
+      color: #4a5568;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .chip {
+      background: #edf2f7;
+      color: #667eea;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .chip:hover {
+      background: #667eea;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      font-size: 14px;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: #667eea;
+      border: 2px solid #667eea;
+    }
+
+    .btn.ghost:hover {
+      background: #667eea;
+      color: white;
+    }
+
+    .btn.ghost[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      color: #a0aec0;
+      border-color: #e2e8f0;
+    }
+
+    .about-cta {
+      background: white;
+      padding: 60px 40px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      animation: fadeInUp 1s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .panel-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #2d3748;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .panel-desc {
+      font-size: 18px;
+      color: #718096;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .actions-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .site-footer {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 32px 0;
+      margin-top: 60px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .muted {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .page-title {
+        font-size: 40px;
+      }
+
+      .page-subtitle {
+        font-size: 18px;
+      }
+
+      .about-stats {
+        gap: 24px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-row {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .topnav {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .about-cta {
+        padding: 40px 24px;
+      }
+
+      .footer-row {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="container topbar-row">
+      <a class="brandlink" href="/" aria-label="Go to Home">
+        <span class="brandmark" aria-hidden="true">🚗</span>
+        <span class="brandtext">Fast & Frugal Carpool</span>
+      </a>
+
+      <nav class="topnav" aria-label="Primary navigation">
+        <a class="navlink" href="/">Home</a>
+        <a class="navlink" href="/about" aria-current="page">About</a>
+        <a class="navlink" href="/support">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container app-main">
+    <!-- Hero -->
+    <section class="about-hero">
+      <h1 class="page-title">Meet the team</h1>
+      <p class="page-subtitle">
+        We built <strong>Fast & Frugal Carpool</strong> to make ride-sharing simple, affordable, and organized.
+        Explore our portfolios and see what each of us contributed.
+      </p>
+
+      <div class="about-stats" aria-label="Project highlights">
+        <div class="stat">
+          <span class="stat-number">4</span>
+          <span class="stat-label">Team members</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">CS 493</span>
+          <span class="stat-label">Group project</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">Flask</span>
+          <span class="stat-label">Web app</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Grid -->
+    <section class="team-grid" aria-label="Team members">
+      <!-- Elias -->
+      <article class="profile-card">
+        <div class="profile-top">
+          <div class="avatar" aria-hidden="true">🛡️</div>
+          <div>
+            <h2 class="profile-name">Elias</h2>
+            <p class="profile-role">Coordinator • Security-minded builder</p>
+          </div>
+        </div>
+
+        <p class="profile-bio">
+          Elias keeps the team aligned and moving. He's passionate about ethical hacking and cybersecurity,
+          and he brings a security-first mindset to planning and decision-making.
+        </p>
+
+        <div class="chips" aria-label="Skills">
+          <span class="chip">Coordination</span>
+          <span class="chip">Cybersecurity</span>
+          <span class="chip">Ethical hacking</span>
+        </div>
+
+        <div class="profile-actions">
+          <a class="btn primary" href="https://eliasmurshed1.github.io/eliasmurshed-cs493/" target="_blank" rel="noopener">
+            View Portfolio
+          </a>
+        </div>
+      </article>
+
+      <!-- Frieda -->
+      <article class="profile-card">
+        <div class="profile-top">
+          <div class="avatar" aria-hidden="true">⚙️</div>
+          <div>
+            <h2 class="profile-name">Frieda</h2>
+            <p class="profile-role">Backend • Logic + reliability</p>
+          </div>
+        </div>
+
+        <p class="profile-bio">
+          Frieda focused on the backend systems that power the app—validation, processing, and clean workflows.
+          She enjoys working in VS Code and building Python features that are easy to maintain.
+        </p>
+
+        <div class="chips" aria-label="Skills">
+          <span class="chip">Python</span>
+          <span class="chip">Backend</span>
+          <span class="chip">VS Code</span>
+        </div>
+
+        <div class="profile-actions">
+          <span class="btn ghost" aria-disabled="true">Portfolio Coming Soon</span>
+        </div>
+      </article>
+
+      <!-- Salman -->
+      <article class="profile-card">
+        <div class="profile-top">
+          <div class="avatar" aria-hidden="true">🎨</div>
+          <div>
+            <h2 class="profile-name">Salman</h2>
+            <p class="profile-role">Frontend • Accessible UI</p>
+          </div>
+        </div>
+
+        <p class="profile-bio">
+          Salman builds clean, user-friendly interfaces and focuses on making pages feel polished and accessible.
+          He enjoys bringing structure, readability, and "real app" vibes to every screen.
+        </p>
+
+        <div class="chips" aria-label="Skills">
+          <span class="chip">Frontend</span>
+          <span class="chip">Accessibility</span>
+          <span class="chip">UI/UX</span>
+        </div>
+
+        <div class="profile-actions">
+          <a class="btn primary" href="https://shotosal.github.io/salman.portfolio/" target="_blank" rel="noopener">
+            View Portfolio
+          </a>
+        </div>
+      </article>
+
+      <!-- Dave -->
+      <article class="profile-card">
+        <div class="profile-top">
+          <div class="avatar" aria-hidden="true">🔀</div>
+          <div>
+            <h2 class="profile-name">Dave</h2>
+            <p class="profile-role">Git & Workflow • Clean collaboration</p>
+          </div>
+        </div>
+
+        <p class="profile-bio">
+          Dave specializes in Git workflow and collaboration—branches, pull requests, and keeping the repo organized.
+          He enjoys coding in C++ and Python and making sure the team ships confidently.
+        </p>
+
+        <div class="chips" aria-label="Skills">
+          <span class="chip">Git</span>
+          <span class="chip">C++</span>
+          <span class="chip">Python</span>
+        </div>
+
+        <div class="profile-actions">
+          <span class="btn ghost" aria-disabled="true">Portfolio Coming Soon</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta" aria-label="Call to action">
+      <h2 class="panel-title">Want to see the app in action?</h2>
+      <p class="panel-desc">
+        Head back to the home page and start setting up a carpool in under a minute.
+      </p>
+
+      <div class="actions-row">
+        <a class="btn ghost" href="/">Back to Home</a>
+        <a class="btn primary" href="/car">Get Started</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>&copy; 2026 Fast & Frugal Carpool</p>
+      <p class="muted">CS 493 • Group Project</p>
+    </div>
+  </footer>
+</body>
+</html>
