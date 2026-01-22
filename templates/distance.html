@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trip Distance & Map • Fast & Frugal Carpool</title>
+  <link rel="stylesheet" href="../static/styles/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Trip Distance & Map</h1>
+  </header>
+  <main>
+    <section>
+      <h2>Trip Details</h2>
+      <p><strong>Pickup Location:</strong> {{ pickup }}</p>
+      <p><strong>Dropoff Location:</strong> {{ dropoff }}</p>
+      <!-- only show if stop is not None -->
+      {% if stop1 %}
+        <p><strong>Stop 1:</strong> {{ stop1 }}</p>
+      {% endif %}
+      {% if stop2 %}
+        <p><strong>Stop 2:</strong> {{ stop2 }}</p>
+      {% endif %}
+      {% if stop3 %}
+        <p><strong>Stop 3:</strong> {{ stop3 }}</p>
+      {% endif %}
+      <p><strong>Number of Passengers:</strong> {{ passengers }}</p>
+    </section>
+    <section>
+      
+      <!-- lets take the dict and display its contents as leg.number is h3 -->
+      {% if leg_info %}
+        {% for leg in leg_info %}
+          <h3>Leg {{ leg.leg_number }}</h3>
+          <p>Start Address: {{ leg.start_address }}</p>
+          <p>End Address: {{ leg.end_address }}</p>
+          <p>Distance: {{ leg.distance }}</p>
+          <p>Duration: {{ leg.duration }}</p>
+        {% endfor %}
+      {% else %}
+        <p>No leg information available.</p>
+      {% endif %}
+      <p><strong>Total Distance:</strong> {{ total_distance }} miles</p>
+      <p><strong>Total Duration:</strong> {{ total_duration }} minutes</p>
+      <div>
+        <h3>Map:</h3>
+        {% if map_file %}
+          <img src="{{ url_for('static', filename='map.png') }}" alt="Trip Map" />
+        {% else %}
+          <p>Map not available.</p>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+</body>
+</html>
