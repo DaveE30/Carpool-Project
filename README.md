@@ -2,11 +2,11 @@
 
 ## Project Idea:
 
-**Description:** A practical tool for road trips that calculates total fuel costs and splits them among passengers based on the vehicle's efficiency.
+**Description:** A practical tool for car pool that calculates total fuel costs and splits them among passengers based on the vehicle's efficiency.
 
-**User Input:** Distance to travel (km/miles), the car's fuel efficiency (e.g., L/100km or MPG), the current price of gas, and the number of people in the car, their unit of measurement preference.
+**User Input:** The driver's car make, model and submodel, the locations of their trip start, end, and any waypoints along the way. It will also take the number of people in the car, and the user's unit of measurement preference.
 
-**App Output:** A breakdown showing the total cost of the trip, the cost per person, and a "frugality rating" based on how much they are saving by carpooling vs traveling alone.
+**App Output:** The app will give back information about the driver's car, the total distance and duration of the trip as well as any additional legs. Finally, it will provide a breakdown showing the total cost of the trip, the cost per person, and a "frugality rating" based on how much they are saving by carpooling vs traveling alone.
 
 ## Running the Program:
 1. Run your virtual environment
@@ -15,6 +15,11 @@
 3. After the dependencies have downloaded, click the app.py file and run the file code.
 4. Find the local host url in the terminal and click it while holding the ctrl button.
 5. Have fun!
+
+## API's Used:
+
+- Car API : "https://carapi.app/api"
+- Google Maps API
 
 
 ## Roles:
