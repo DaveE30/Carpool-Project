@@ -80,7 +80,7 @@
         <p>Your estimated cost per person for this trip is: <strong>${{ cost_per_person }}</strong></p>
       <button onclick="window.history.back();" class="btn ghost">Back</button>
       <!-- onclick run save_report   -->
-      <form method="POST" action="/download-report" style="display:inline;">
+      <form id="save_report" method="POST" action="/download-report" style="display:inline;">
         <input type="hidden" name="total_distance" value="{{ total_distance }}">
         <input type="hidden" name="total_duration" value="{{ total_duration }}">
         <input type="hidden" name="cost_per_person" value="{{ cost_per_person }}">

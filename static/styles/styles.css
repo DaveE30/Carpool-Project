@@ -335,6 +335,14 @@ p {
     backdrop-filter: blur(10px);
 }
 
+/* id save_report has no styling */
+#save_report {
+    margin:0px;
+    padding: 0px;
+    box-shadow: none;
+    border: none;
+}
+
 form {
     max-width: 500px;
     margin: 30px auto;
