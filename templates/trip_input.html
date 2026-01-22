@@ -60,10 +60,9 @@
           <div class="stops-header">
             <span class="stops-title">
               <span>🛑</span>
-              Stops (optional)
+              Add Stops (optional)
             </span>
           </div>
-
           <div class="stop-field">
             <input class="control" type="text" id="stop1" name="stop1" placeholder="Stop 1 address" />
           </div>
@@ -118,12 +117,13 @@
         <div class="divider"></div>
 
         <div class="actions-row">
+          <!-- create a back button -->
+          <button class="btn ghost" type="button" onclick="window.history.back();">
+            Back
+          </button>
           <button class="btn primary" type="submit">
             Calculate cost
           </button>
-          <a class="btn ghost" href="index.html" aria-label="Cancel and return home">
-            Cancel
-          </a>
         </div>
       </form>
     </section>

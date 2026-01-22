@@ -33,7 +33,23 @@ def get_directions_and_map(origin, destination, waypoints=[]):
             })
 
         total_distance = sum([float(d.split()[0]) for d in distances])
-        total_duration = sum([int(t.split()[0]) for t in durations])
+        total_duration = 0
+        for t in durations:
+            if "hour" in t.lower():
+                # Extract hours and minutes
+                parts = t.split()
+                hours = 0
+                minutes = 0
+                for i, part in enumerate(parts):
+                    if "hour" in part.lower():
+                        hours = int(parts[i-1])
+                    elif "min" in part.lower():
+                        minutes = int(parts[i-1])
+                total_duration += (hours * 60) + minutes
+            else:
+                # Only minutes
+                minutes = int(t.split()[0])
+                total_duration += minutes
 
         polyline = directions_result[0]['overview_polyline']['points']
         map_result = gmaps.static_map(
