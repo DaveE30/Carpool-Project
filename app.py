@@ -74,13 +74,5 @@ def trip_output():
 
     return render_template('distance.html', leg_info=leg_info, total_distance=total_distance, total_duration=total_duration, map_file=map_file, pickup=pickup, dropoff=dropoff, stop1=stop1, stop2=stop2, stop3=stop3, passengers=passengers)
 
-@app.route('/passengers', methods=['GET'])
-def passengers():
-    return render_template('passengers.html')
-
-@app.route('/about', methods=['GET'])
-def about():
-    return render_template('about.html')
-
 if __name__ == '__main__':
     app.run(debug=True)

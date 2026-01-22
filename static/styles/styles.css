@@ -9,6 +9,19 @@ body {
   line-height: 1.6;
 }
 
+h2 {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.738);
+  margin-bottom: 15px;
+  text-align: center;
+}
+h3 {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.738);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
 .topbar {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -63,23 +76,23 @@ body {
 
 .page-subtitle {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.738);
   max-width: 600px;
   margin: 0 auto;
 }
 
 .panel {
-  background: white;
+  background: rgba(255, 255, 255, 0.099);
   border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10rgbapx 40px rgba(0, 0, 0, 0.15);
   margin-bottom: 48px;
   animation: fadeIn 0.8s;
 }
 
 .panel-head { margin-bottom: 32px; }
 .panel-title { font-size: 28px; font-weight: 700; color: #2d3748; margin-bottom: 8px; }
-.panel-desc { color: #718096; font-size: 16px; }
+.panel-desc { color: #cbdaf3; font-size: 16px; }
 
 .form-grid { display: flex; flex-direction: column; gap: 32px; }
 
@@ -118,7 +131,7 @@ label {
 select.control { cursor: pointer; }
 
 .help {
-  color: #a0aec0;
+  color: #2d3748;
   font-size: 14px;
   margin-top: 4px;
 }
@@ -326,11 +339,11 @@ form {
     max-width: 500px;
     margin: 30px auto;
     padding: 30px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    background: linear-gradient(135deg, #667eea, rgba(255,255,255,0.7));
     border-radius: 20px;
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.09);
 }
 
 input[type="text"],
@@ -919,7 +932,7 @@ body.passenger-page::before {
 }
 
 .details-section {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   
 }
