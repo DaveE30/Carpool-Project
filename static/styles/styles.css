@@ -937,8 +937,41 @@ body.passenger-page::before {
   
 }
 
-@media (max-width: 1024px) {
-  .trip-container {
-    grid-template-columns: 1fr;
-  }
+/* layout for legs + mileage side by side */
+.legs-mileage {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.mileage-section {
+  background: transparent;
+  border: none;
+  padding: 12px 16px;
+  box-shadow: none;
+  color: #fff;
+}
+
+.mileage-section h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.mileage-item {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+.mileage-item p {
+  margin: 0;
+  color: #fff;
+}
+
+.mileage-item strong {
+  color: #cbdaf3;
 }

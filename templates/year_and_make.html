@@ -1,0 +1,23 @@
+<form method="GET" action="/car-choice/model">
+    <h2>Choose the year of your car</h2>
+    <select name="year" id="year" >
+        <option value="">--Select Year--</option>
+        {% for y in years %}
+            <option value="{{ y }}" {% if selected_year == y %}selected{% endif %}>{{ y }}</option>
+        {% endfor %}
+    </select>
+  
+    <h2>Choose the make of your car</h2>
+    <select name="make" id="make" >
+        <option value="">--Select Make--</option>
+        {% for m in makes %}
+            <option value="{{ m }}" {% if selected_make == m %}selected{% endif %}>{{ m }}</option>
+        {% endfor %}
+    </select>
+
+
+   <!-- hide this form on click and reveal model.html -->
+
+    <button type="submit">Next</button>
+    
+</form>

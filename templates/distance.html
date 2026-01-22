@@ -73,8 +73,23 @@
           <p>No leg information available.</p>
         {% endif %}
       </div>
+      <div class="cost-section">
+        <h2>Cost Per Person</h2>
+        <p>The average gas price used for this calculation is $2.83 per gallon.</p>
+        <p>The total gas cost for this trip is: <strong>${{ total_gas_cost }}</strong></p>
+        <p>Your estimated cost per person for this trip is: <strong>${{ cost_per_person }}</strong></p>
       <button onclick="window.history.back();" class="btn ghost">Back</button>
-      
+      <!-- onclick run save_report   -->
+      <form method="POST" action="/download-report" style="display:inline;">
+        <input type="hidden" name="total_distance" value="{{ total_distance }}">
+        <input type="hidden" name="total_duration" value="{{ total_duration }}">
+        <input type="hidden" name="cost_per_person" value="{{ cost_per_person }}">
+        <input type="hidden" name="total_gas_cost" value="{{ total_gas_cost }}">
+        <input type="hidden" name="pickup" value="{{ pickup }}">
+        <input type="hidden" name="dropoff" value="{{ dropoff }}">
+        <input type="hidden" name="passengers" value="{{ passengers }}">
+        <button type="submit" class="btn">Save as Text</button>
+      </form>
     </main>
   </div>
 </body>

@@ -1,0 +1,1 @@
+   stop2 = request.form.get('stop2')
