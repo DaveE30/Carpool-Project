@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trip Distance & Map • Fast & Frugal Carpool</title>
+  <link rel="stylesheet" href="../static/styles/styles.css" />
+</head>
+<body>
+  <div class="distance-page">
+    <header>
+      <h1>Trip Distance & Map</h1>
+    </header>
+    <main class="container">
+      <div class="trip-container">
+        <div class="map-section">
+          <h2>Most Efficient Route</h2>
+          {% if map_file %}
+            <img src="{{ url_for('static', filename='map.png') }}" alt="Trip Map" />
+          {% else %}
+            <p>Map not available.</p>
+          {% endif %}
+        </div>
+
+        <div class="details-section">
+          <h2>Trip Details</h2>
+          <div class="detail-item">
+            <p><strong>Pickup Location:</strong> {{ pickup }}</p>
+          </div>
+          <div class="detail-item">
+            <p><strong>Dropoff Location:</strong> {{ dropoff }}</p>
+          </div>
+          {% if stop1 %}
+            <div class="detail-item">
+              <p><strong>Stop 1:</strong> {{ stop1 }}</p>
+            </div>
+          {% endif %}
+          {% if stop2 %}
+            <div class="detail-item">
+              <p><strong>Stop 2:</strong> {{ stop2 }}</p>
+            </div>
+          {% endif %}
+          {% if stop3 %}
+            <div class="detail-item">
+              <p><strong>Stop 3:</strong> {{ stop3 }}</p>
+            </div>
+          {% endif %}
+          <div class="detail-item">
+            <p><strong>Number of Passengers:</strong> {{ passengers }}</p>
+          </div>
+          <div class="detail-item">
+            <p><strong>Total Distance:</strong> {{ total_distance }} miles</p>
+          </div>
+          <div class="detail-item">
+            <p><strong>Total Duration:</strong> {{ total_duration }} minutes</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="legs-section">
+        <h2>Route Legs</h2>
+        {% if leg_info %}
+          {% for leg in leg_info %}
+            <div class="leg-card">
+              <h3>Leg {{ loop.index }}</h3>
+              <p><strong>From:</strong> {{ leg.start_address }}</p>
+              <p><strong>To:</strong> {{ leg.end_address }}</p>
+              <p><strong>Distance:</strong> {{ leg.distance }}</p>
+              <p><strong>Duration:</strong> {{ leg.duration }}</p>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>No leg information available.</p>
+        {% endif %}
+      </div>
+      <button onclick="window.history.back();" class="btn ghost">Back</button>
+      
+    </main>
+  </div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -45,14 +46,7 @@
             <span class="location-icon">📍</span>
             Pickup address
           </label>
-          <input
-            class="control"
-            type="text"
-            id="pickup"
-            name="pickup"
-            placeholder="Enter pickup location"
-            required
-          />
+          <input class="control" type="text" id="pickup" name="pickup" placeholder="Enter pickup location" required />
           <small class="help">
             Starting point for your trip
           </small>
@@ -61,42 +55,24 @@
         <div class="divider"></div>
 
         <!-- Stops Section -->
+
         <div class="stops-section">
           <div class="stops-header">
             <span class="stops-title">
               <span>🛑</span>
-              Stops (optional)
+              Add Stops (optional)
             </span>
           </div>
-
           <div class="stop-field">
-            <input
-              class="control"
-              type="text"
-              id="stop1"
-              name="stop1"
-              placeholder="Stop 1 address"
-            />
+            <input class="control" type="text" id="stop1" name="stop1" placeholder="Stop 1 address" />
           </div>
 
           <div class="stop-field">
-            <input
-              class="control"
-              type="text"
-              id="stop2"
-              name="stop2"
-              placeholder="Stop 2 address"
-            />
+            <input class="control" type="text" id="stop2" name="stop2" placeholder="Stop 2 address" />
           </div>
 
           <div class="stop-field">
-            <input
-              class="control"
-              type="text"
-              id="stop3"
-              name="stop3"
-              placeholder="Stop 3 address"
-            />
+            <input class="control" type="text" id="stop3" name="stop3" placeholder="Stop 3 address" />
           </div>
 
           <p class="add-stop-note">Add any stops between pickup and destination</p>
@@ -110,14 +86,8 @@
             <span class="location-icon">🎯</span>
             Destination address
           </label>
-          <input
-            class="control"
-            type="text"
-            id="destination"
-            name="destination"
-            placeholder="Enter destination"
-            required
-          />
+          <input class="control" type="text" id="destination" name="destination" placeholder="Enter destination"
+            required />
           <small class="help">
             Final destination for your trip
           </small>
@@ -131,12 +101,7 @@
             <span class="location-icon">👥</span>
             Number of passengers
           </label>
-          <select
-            class="control"
-            id="passengers"
-            name="passengers"
-            required
-          >
+          <select class="control" id="passengers" name="passengers" required>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -152,12 +117,13 @@
         <div class="divider"></div>
 
         <div class="actions-row">
+          <!-- create a back button -->
+          <button class="btn ghost" type="button" onclick="window.history.back();">
+            Back
+          </button>
           <button class="btn primary" type="submit">
             Calculate cost
           </button>
-          <a class="btn ghost" href="index.html" aria-label="Cancel and return home">
-            Cancel
-          </a>
         </div>
       </form>
     </section>
@@ -201,4 +167,5 @@
     </div>
   </footer>
 </body>
+
 </html>
